@@ -4,7 +4,7 @@ info:
   description: An API for querying and looking up information about a Shopify store's orders and customers.
   version: 1.0.0
 servers:
-  - url: https://store-admin-chatgpt-plugin.herokuapp.com
+  - url: http://localhost:8000
 paths:
   /orders:
     get:

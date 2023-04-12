@@ -5,15 +5,14 @@
   "description_for_model": "Plugin for looking up information about a Shopify store, including orders and customers. Use it to find answers to questions about a store.",
   "description_for_human": "Look up information about your store.",
   "auth": {
-    "type": "user_http",
-    "authorization_type": "bearer"
+    "type": "none"
   },
   "api": {
     "type": "openapi",
-    "url": "https://store-admin-chatgpt-plugin.herokuapp.com/.well-known/openapi.yaml",
+    "url": "http://localhost:8000/.well-known/openapi.yaml",
     "has_user_authentication": false
   },
-  "logo_url": "https://store-admin-chatgpt-plugin.herokuapp.com/.well-known/logo.png",
-  "contact_email": "support@ecommgpt.app", 
-  "legal_info_url": "https://ecommgpt.app/legal-info"
+  "logo_url": "http://localhost:8000/.well-known/logo.png",
+  "contact_email": "support@yourstore.com", 
+  "legal_info_url": "https://yourstore.com/legal-info"
 }

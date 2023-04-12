@@ -39,13 +39,11 @@ from services.shopify import (
 )
 
 PORT = int(os.getenv("PORT", 8000))
-DOMAIN = os.getenv("DOMAIN")
-ENVIRONMENT = os.getenv("ENVIRONMENT")
-if ENVIRONMENT != "production":
-    DOMAIN = f"{DOMAIN}:{PORT}"
+HOST = os.getenv("HOST")
+assert HOST is not None
 
 origins = [
-    DOMAIN,
+    HOST,
     "https://chat.openai.com",
 ]
 
@@ -69,7 +67,7 @@ app = FastAPI(
     title="Shopify Store Admin Plugin API",
     description="An API for querying and looking up information about a Shopify store's orders and customers.",
     version="1.0.0",
-    servers=[{"url": DOMAIN}]
+    servers=[{"url": HOST}]
 )
 app.add_middleware(
     CORSMiddleware,
@@ -78,7 +76,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
+if HOST == "http://localhost:8000":
+    app.mount("/.well-known", StaticFiles(directory="local-server", html=True), name="static")
+else:
+    app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
 
 
 @app.get(
